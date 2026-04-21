@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
+import { apiUrl } from '../config/api';
 
 export default function BookingModal({ train, onClose }) {
   const { token, user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ export default function BookingModal({ train, onClose }) {
     setStatus('loading');
     
     try {
-      const response = await fetch('http://localhost:5000/api/booking/book', {
+      const response = await fetch(apiUrl('/api/booking/book'), {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

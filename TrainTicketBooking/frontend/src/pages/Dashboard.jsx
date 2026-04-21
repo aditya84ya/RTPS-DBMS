@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../config/api';
 
 export default function Dashboard() {
     const { token, user } = useContext(AuthContext);
@@ -19,7 +20,7 @@ export default function Dashboard() {
 
     const fetchHistory = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/booking/history', {
+            const res = await fetch(apiUrl('/api/booking/history'), {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -34,7 +35,7 @@ export default function Dashboard() {
     const handleCancel = async (pnr) => {
         if (!window.confirm('Are you sure you want to cancel this ticket?')) return;
         try {
-            const res = await fetch('http://localhost:5000/api/booking/cancel', {
+            const res = await fetch(apiUrl('/api/booking/cancel'), {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',

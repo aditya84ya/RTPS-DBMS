@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { apiUrl } from '../config/api';
 
 export default function Auth() {
     const [isLogin, setIsLogin] = useState(true);
@@ -18,7 +19,7 @@ export default function Auth() {
         const endpoint = isLogin ? '/api/auth/login' : '/api/auth/signup';
         
         try {
-            const res = await fetch(`http://localhost:5000${endpoint}`, {
+            const res = await fetch(apiUrl(endpoint), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

@@ -37,3 +37,27 @@ This is a comprehensive Java Console-based application integrated with MySQL usi
 5. Open `Main.java` and click "Run".
 
 Enjoy seamless booking!
+
+## Deploy on Vercel (React + Node API)
+
+This repository includes a Vercel setup file at `TrainTicketBooking/vercel.json` that:
+- builds the Vite frontend from `frontend/`
+- serves backend API routes through `api/index.js` (Express app from `backend/server.js`)
+
+### Vercel project settings
+1. Import the GitHub repo in Vercel.
+2. Set **Root Directory** to `TrainTicketBooking`.
+3. Keep framework auto-detection enabled.
+
+### Required environment variables (Vercel Project → Settings → Environment Variables)
+- `DB_HOST`
+- `DB_PORT`
+- `DB_USER`
+- `DB_PASSWORD`
+- `DB_NAME`
+- `JWT_SECRET`
+
+### Optional frontend environment variable
+- `VITE_API_BASE_URL`
+  - Leave empty for same-origin API calls on Vercel (`/api/...`).
+  - Set it only if frontend and backend are deployed to different domains.

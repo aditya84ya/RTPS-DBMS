@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Edit2, Trash2, PlusCircle, X } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../config/api';
 
 export default function AdminDashboard() {
   const { user, token } = useContext(AuthContext);
@@ -33,7 +34,7 @@ export default function AdminDashboard() {
 
   const fetchTrains = () => {
       setLoading(true);
-      fetch('http://localhost:5000/api/trains')
+      fetch(apiUrl('/api/trains'))
         .then(res => res.json())
         .then(data => {
             setTrains(data);
@@ -64,7 +65,7 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
       if (!window.confirm("Are you sure you want to delete this train?")) return;
       try {
-          const res = await fetch(`http://localhost:5000/api/trains/${id}`, {
+          const res = await fetch(apiUrl(`/api/trains/${id}`), {
               method: 'DELETE',
               headers: {
                   'Authorization': `Bearer ${token}`
@@ -85,8 +86,8 @@ export default function AdminDashboard() {
       e.preventDefault();
       const isUpdating = formData.train_id !== null;
       const url = isUpdating 
-          ? `http://localhost:5000/api/trains/${formData.train_id}` 
-          : `http://localhost:5000/api/trains/`;
+          ? apiUrl(`/api/trains/${formData.train_id}`) 
+          : apiUrl('/api/trains/');
           
       const method = isUpdating ? 'PUT' : 'POST';
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import BookingModal from '../components/BookingModal';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../config/api';
 
 export default function TrainsList() {
   const [trains, setTrains] = useState([]);
@@ -12,7 +13,7 @@ export default function TrainsList() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/trains')
+    fetch(apiUrl('/api/trains'))
       .then(res => res.json())
       .then(data => {
         setTrains(data);
